@@ -1,90 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Markdown, by Studio b. — For founders who've outgrown the typical tech newsletter.</title>
-  <meta name="description" content="The newsletter of Build, by Studio b. War stories from running Bolt, AcuOps, and Amplify on real operations.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markdown, by Studio b. — Field notes from real operations.</title>
+  <meta name="description" content="A newsletter for operators and technical founders running real operations. War stories from the client work and the products we ship — Bolt, AcuOps, and Amplify.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Markdown, by Studio b.">
-  <meta property="og:title" content="For founders who've outgrown the typical tech newsletter.">
-  <meta property="og:description" content="The newsletter of Build, by Studio b. War stories from running Bolt, AcuOps, and Amplify on real operations.">
+  <meta property="og:title" content="Field notes from real operations.">
+  <meta property="og:description" content="A newsletter for operators and technical founders. War stories from the client work and the products we ship.">
   <meta property="og:url" content="https://markdown.b.studio">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #0A0A0A;
-      --display: #E8E8E8;
-      --body-text: #C8C8C8;
-      --process-blue: #3A7CA5;
+      --yolk: #F7D344;
+      --ink: #0D0D0D;
+      --paper: #F4F1EB;
       --vermillion: #D94425;
-      --very-dim: rgba(200,200,200,0.08);
-      --dim: rgba(200,200,200,0.35);
+      --yolk-dim: rgba(247, 211, 68, 0.5);
+      --yolk-very-dim: rgba(247, 211, 68, 0.18);
+      --yolk-text: rgba(247, 211, 68, 0.72);
+      --rule: rgba(247, 211, 68, 0.1);
     }
+
     html { height: 100%; scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--body-text); font-family: 'IBM Plex Mono', monospace; min-height: 100vh; position: relative; overflow-x: hidden; }
-    body::before { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(-45deg, transparent 0, transparent 22px, rgba(58,124,165,0.045) 22px, rgba(58,124,165,0.045) 23px); animation: drift 160s linear infinite; pointer-events: none; z-index: 0; }
-    @keyframes drift { from { background-position: 0 0; } to { background-position: 300px 300px; } }
+    body { background: var(--ink); color: var(--yolk-text); font-family: 'IBM Plex Mono', monospace; min-height: 100vh; position: relative; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(-45deg, transparent 0, transparent 22px, rgba(247,211,68,0.025) 22px, rgba(247,211,68,0.025) 23px); pointer-events: none; z-index: 0; }
 
-    .stripe { height: 4px; background: repeating-linear-gradient(-45deg, var(--vermillion) 0, var(--vermillion) 6px, var(--bg) 6px, var(--bg) 12px); position: relative; z-index: 1; }
+    .stripe { height: 4px; background: repeating-linear-gradient(-45deg, var(--yolk) 0, var(--yolk) 6px, var(--ink) 6px, var(--ink) 12px); position: relative; z-index: 1; }
 
-    .nav { position: relative; z-index: 1; padding: 1.25rem 4rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--very-dim); }
-    .bmark { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.6rem; color: var(--process-blue); text-decoration: none; letter-spacing: -0.04em; line-height: 1; }
+    .nav { position: relative; z-index: 1; padding: 1.25rem 4rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--rule); }
+    .bmark { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.6rem; color: var(--yolk); text-decoration: none; letter-spacing: -0.04em; line-height: 1; }
     .bmark .dot { color: var(--vermillion); }
     .nav-right { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,200,200,0.4); text-decoration: none; transition: color 0.12s; padding: 0.5rem; }
-    .nav-link:hover { color: var(--process-blue); }
+    .nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--yolk-dim); text-decoration: none; transition: color 0.12s; padding: 0.5rem; }
+    .nav-link:hover { color: var(--yolk); }
     .brand-b { text-transform: none; }
     .brand-dot { color: var(--vermillion); }
 
-    .hero { position: relative; z-index: 1; padding: 6rem 4rem 4rem; max-width: 1200px; }
-    .firm-label { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.4); margin-bottom: 3rem; }
-    .firm-label a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(200,200,200,0.2); transition: color 0.12s, border-color 0.12s; }
-    .firm-label a:hover { color: var(--process-blue); border-bottom-color: var(--process-blue); }
-    .hero-headline { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(4rem, 9vw, 8rem); letter-spacing: -0.04em; line-height: 0.9; color: var(--display); margin-bottom: 2rem; }
+    .page { position: relative; z-index: 1; display: grid; grid-template-columns: 65fr 35fr; min-height: calc(100vh - 4px - 60px); }
+    .left { padding: 5rem 3rem 5rem 4.5rem; border-right: 1px solid var(--rule); display: flex; flex-direction: column; justify-content: center; }
+    .right { padding: 5rem 4.5rem 5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+
+    .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--yolk-dim); margin-bottom: 3.5rem; }
+
+    .headline-block { margin-bottom: 2.5rem; line-height: 0.88; }
+    .hero-word { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(5rem, 11vw, 9.5rem); letter-spacing: -0.04em; color: var(--yolk); }
     .hero-ext { color: var(--vermillion); }
-    .hero-sub { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: clamp(0.85rem, 1.4vw, 1.05rem); line-height: 1.45; color: rgba(200,200,200,0.55); margin-bottom: 1.5rem; max-width: 540px; }
-    .hero-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; line-height: 1.8; color: rgba(200,200,200,0.5); max-width: 540px; }
 
-    .subscribe { position: relative; z-index: 1; padding: 5rem 4rem; border-top: 1px solid var(--very-dim); border-bottom: 1px solid var(--very-dim); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-    .subscribe-left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.35); margin-bottom: 1rem; }
-    .subscribe-left h2 { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.15; color: var(--display); margin-bottom: 1rem; }
-    .subscribe-left p { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; line-height: 1.75; color: rgba(200,200,200,0.5); max-width: 480px; }
-    .subscribe-right .form-comments { margin-bottom: 2rem; }
-    .form-comment { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--process-blue); line-height: 1.9; }
+    .hero-sub { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: clamp(0.85rem, 1.4vw, 1.05rem); line-height: 1.45; color: var(--yolk-text); margin-bottom: 1.75rem; max-width: 520px; }
+    .hero-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; line-height: 1.8; color: rgba(247,211,68,0.6); max-width: 540px; }
 
-    .ships { position: relative; z-index: 1; padding: 5rem 4rem; border-top: 1px solid var(--very-dim); border-bottom: 1px solid var(--very-dim); }
-    .ships-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.35); margin-bottom: 1rem; }
-    .ships-headline { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.15; color: var(--display); margin-bottom: 2.5rem; }
-    .ship-card { display: grid; grid-template-columns: 200px 1fr auto; gap: 2.5rem; align-items: baseline; padding: 1.75rem 0; border-top: 1px solid var(--very-dim); }
-    .ship-card:last-child { border-bottom: 1px solid var(--very-dim); }
-    .ship-name { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.1rem; color: var(--process-blue); text-decoration: none; transition: color 0.12s; }
-    .ship-name:hover { color: var(--display); }
-    .ship-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: rgba(200,200,200,0.55); }
+    .rule-line { width: 2.5rem; height: 1px; background: var(--yolk); margin-top: 3rem; opacity: 0.45; }
+
+    .form-comments { margin-bottom: 3rem; }
+    .form-comment { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--yolk-dim); line-height: 1.95; }
+    .form-comment .syntax { color: rgba(247,211,68,0.35); }
+
+    .embed-wrap { margin-bottom: 1rem; }
+    .form-note { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: rgba(247,211,68,0.3); margin-top: 1rem; letter-spacing: 0.1em; }
+
+    .ships { position: relative; z-index: 1; padding: 5rem 4rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .ships-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yolk-dim); margin-bottom: 1rem; }
+    .ships-headline { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.15; color: var(--yolk); margin-bottom: 2.5rem; }
+    .ship-card { display: grid; grid-template-columns: 200px 1fr auto; gap: 2.5rem; align-items: baseline; padding: 1.75rem 0; border-top: 1px solid var(--rule); }
+    .ship-card:last-child { border-bottom: 1px solid var(--rule); }
+    .ship-name { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.15rem; color: var(--yolk); text-decoration: none; transition: color 0.12s; }
+    .ship-name:hover { color: var(--vermillion); }
+    .ship-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; line-height: 1.7; color: rgba(247,211,68,0.6); }
     .ship-link { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--vermillion); text-decoration: none; white-space: nowrap; transition: color 0.12s; }
-    .ship-link:hover { color: var(--display); }
-    @media (max-width: 768px) { .ship-card { grid-template-columns: 1fr; gap: 0.75rem; } }
+    .ship-link:hover { color: var(--yolk); }
 
     .archive { position: relative; z-index: 1; padding: 5rem 4rem; }
-    .section-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.35); margin-bottom: 2rem; }
-    .archive-empty { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.5rem; color: var(--display); margin-bottom: 1rem; }
-    .archive-empty-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; line-height: 1.75; color: rgba(200,200,200,0.45); max-width: 540px; }
+    .section-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yolk-dim); margin-bottom: 2rem; }
+    .archive-empty { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.5rem; color: var(--yolk); margin-bottom: 1rem; }
+    .archive-empty-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; line-height: 1.75; color: rgba(247,211,68,0.55); max-width: 580px; }
+    .archive-empty-body em { color: var(--vermillion); font-style: normal; }
 
-    footer { position: relative; z-index: 1; padding: 3rem 4rem 2rem; border-top: 1px solid var(--very-dim); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
-    .footer-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.35); margin-bottom: 0.75rem; }
-    .footer-col a { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(200,200,200,0.5); text-decoration: none; padding: 0.25rem 0; transition: color 0.12s; }
-    .footer-col a:hover { color: var(--process-blue); }
-    .footer-bottom { position: relative; z-index: 1; padding: 1.25rem 4rem 2rem; display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(200,200,200,0.25); }
+    footer { position: relative; z-index: 1; padding: 3rem 4rem 2rem; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yolk-dim); margin-bottom: 0.75rem; }
+    .footer-col a { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; color: rgba(247,211,68,0.55); text-decoration: none; padding: 0.25rem 0; transition: color 0.12s; }
+    .footer-col a:hover { color: var(--yolk); }
+    .footer-bottom { position: relative; z-index: 1; padding: 1.25rem 4rem 2rem; display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(247,211,68,0.25); }
 
     @media (max-width: 768px) {
       .nav { padding: 1rem 1.5rem; }
-      .hero { padding: 4rem 1.5rem 3rem; }
-      .subscribe { padding: 3rem 1.5rem; grid-template-columns: 1fr; gap: 2rem; }
-      .archive { padding: 3rem 1.5rem; }
+      .page { grid-template-columns: 1fr; }
+      .left { padding: 3.5rem 1.75rem 3rem; border-right: none; border-bottom: 1px solid var(--rule); }
+      .right { padding: 3rem 1.75rem 4rem; }
+      .ships, .archive { padding: 3rem 1.5rem; }
+      .ship-card { grid-template-columns: 1fr; gap: 0.75rem; }
       footer { grid-template-columns: 1fr; padding: 3rem 1.5rem 1.5rem; }
       .footer-bottom { padding: 1rem 1.5rem 2rem; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
     }
@@ -104,28 +114,40 @@
   </div>
 </nav>
 
-<section class="hero">
-  <p class="firm-label">Markdown, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span> · Build notes from real operations</p>
-  <h1 class="hero-headline">MARKDOWN<span class="hero-ext">.md</span></h1>
-  <p class="hero-sub">For founders who've outgrown the typical tech newsletter.</p>
-  <p class="hero-body">We build Bolt, AcuOps, and Amplify on live operations — real warehouses, real customer ERPs, real consequences. We write about the architectural decisions we regret, the vendors we replaced, and the things that held. If you want the sanitized version, it's already on every newsletter you've subscribed to.</p>
-</section>
+<div class="page">
+  <div class="left">
+    <div class="kicker">Markdown, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span> · Field notes from real operations</div>
 
-<section class="subscribe" id="subscribe">
-  <div class="subscribe-left">
-    <div class="kicker">Subscribe — free</div>
-    <h2>Twice monthly. One click out, always.</h2>
-    <p>No drip campaign, no growth-hacked send cadence. War stories and architectural notes from inside Bolt, AcuOps, and Amplify — written for technical founders + operators.</p>
-  </div>
-  <div class="subscribe-right">
-    <div class="form-comments">
-      <div class="form-comment">// twice monthly</div>
-      <div class="form-comment">// technical founders + operators</div>
-      <div class="form-comment">// one click out, always</div>
+    <div class="headline-block">
+      <span class="hero-word">MARKDOWN<span class="hero-ext">.md</span></span>
     </div>
-    <iframe src="https://embeds.beehiiv.com/pub_4e58019b-916a-42ec-94bd-99e35e601bde?slim=true" data-test-id="beehiiv-embed" height="52" frameborder="0" scrolling="no" style="margin: 0; border-radius: 0px !important; background-color: transparent; width: 100%;"></iframe>
+
+    <p class="hero-sub">For operators and technical founders running real operations.</p>
+
+    <p class="hero-body">
+      War stories from inside the work — both the client engagements and
+      the products we ship. We write about the architectural decisions
+      we regret, the vendors we replaced, and the things that held.
+      Bolt, AcuOps, and Amplify run real operations at Studio
+      <span class="brand-b">b<span class="brand-dot">.</span></span>'s portfolio companies.
+      The newsletter is downstream of that work.
+    </p>
+
+    <div class="rule-line"></div>
   </div>
-</section>
+
+  <div class="right" id="subscribe">
+    <div class="form-comments">
+      <div class="form-comment"><span class="syntax">//</span> issued when there's something to say</div>
+      <div class="form-comment"><span class="syntax">//</span> for operators + technical founders</div>
+      <div class="form-comment"><span class="syntax">//</span> one click out, always</div>
+    </div>
+    <div class="embed-wrap">
+      <iframe src="https://embeds.beehiiv.com/pub_4e58019b-916a-42ec-94bd-99e35e601bde?slim=true" data-test-id="beehiiv-embed" height="52" frameborder="0" scrolling="no" style="margin: 0; border-radius: 0px !important; background-color: transparent; width: 100%;"></iframe>
+    </div>
+    <p class="form-note">No spam. Unsubscribe any time.</p>
+  </div>
+</div>
 
 <section class="ships" id="ships">
   <p class="ships-eyebrow">// What Studio b<span class="brand-dot">.</span> ships</p>
@@ -148,21 +170,15 @@
 </section>
 
 <section class="archive" id="archive">
-  <p class="section-eyebrow">Archive</p>
+  <p class="section-eyebrow">// Archive</p>
   <p class="archive-empty">Issue 001 — coming soon.</p>
-  <p class="archive-empty-body">Markdown is launching. Subscribe above to get the first issue when it ships, and every issue after that.</p>
+  <p class="archive-empty-body">Studio <span class="brand-b">b<span class="brand-dot">.</span></span> ships software <em>and</em> takes markdowns. The first issue is about what we're learning from both sides. Subscribe above to get it when it ships, and every issue after that.</p>
 </section>
 
 <footer>
   <div class="footer-col">
-    <h4>Markdown</h4>
-    <a href="#subscribe">Subscribe</a>
-    <a href="#archive">Archive</a>
-  </div>
-  <div class="footer-col">
-    <h4>Other newsletters</h4>
-    <a href="https://dispatch.b.studio">Dispatch, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
-    <a href="https://dli.b.studio">DLI, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
+    <h4>Other newsletter</h4>
+    <a href="https://dli.b.studio">DLI, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span> — Direct Lending Index</a>
   </div>
   <div class="footer-col">
     <h4>Studio <span class="brand-b">b<span class="brand-dot">.</span></span></h4>

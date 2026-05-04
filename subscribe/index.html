@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Markdown, by Studio b. — Subscribe</title>
-  <meta name="description" content="For founders who've outgrown the typical tech newsletter. War stories from running Bolt, AcuOps, and Amplify on real operations.">
+  <meta name="description" content="A newsletter for operators and technical founders. War stories from the client work and the products we ship — Bolt, AcuOps, and Amplify.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Markdown, by Studio b.">
-  <meta property="og:title" content="For founders who've outgrown the typical tech newsletter.">
-  <meta property="og:description" content="We build Bolt, AcuOps, and Amplify on live operations — real warehouses, real customer ERPs, real consequences. We write about the architectural decisions we regret, the vendors we replaced, and the things that held.">
+  <meta property="og:title" content="Field notes from real operations.">
+  <meta property="og:description" content="A newsletter for operators and technical founders. War stories from the client work and the products we ship.">
   <meta property="og:url" content="https://markdown.b.studio/subscribe">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,207 +18,62 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0A0A0A;
-      --display: #E8E8E8;
-      --body-text: #C8C8C8;
-      --dim: rgba(200, 200, 200, 0.35);
-      --very-dim: rgba(200, 200, 200, 0.08);
+      --yolk: #F7D344;
+      --ink: #0D0D0D;
+      --paper: #F4F1EB;
       --vermillion: #D94425;
-      --process-blue: #3A7CA5;
-      --process-blue-dim: rgba(58, 124, 165, 0.45);
+      --yolk-dim: rgba(247, 211, 68, 0.5);
+      --yolk-very-dim: rgba(247, 211, 68, 0.18);
+      --yolk-text: rgba(247, 211, 68, 0.72);
+      --rule: rgba(247, 211, 68, 0.1);
     }
 
     html { height: 100%; }
+    body { background: var(--ink); color: var(--yolk-text); font-family: 'IBM Plex Mono', monospace; min-height: 100vh; position: relative; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(-45deg, transparent 0, transparent 22px, rgba(247,211,68,0.025) 22px, rgba(247,211,68,0.025) 23px); pointer-events: none; z-index: 0; }
 
-    body {
-      background: var(--bg);
-      color: var(--body-text);
-      font-family: 'IBM Plex Mono', monospace;
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-    }
+    .stripe { height: 4px; background: repeating-linear-gradient(-45deg, var(--yolk) 0, var(--yolk) 6px, var(--ink) 6px, var(--ink) 12px); position: relative; z-index: 1; }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: repeating-linear-gradient(
-        -45deg,
-        transparent 0,
-        transparent 22px,
-        rgba(58, 124, 165, 0.045) 22px,
-        rgba(58, 124, 165, 0.045) 23px
-      );
-      animation: texture-drift 160s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @keyframes texture-drift {
-      from { background-position: 0 0; }
-      to { background-position: 300px 300px; }
-    }
-
-    .stripe {
-      height: 4px;
-      background: repeating-linear-gradient(
-        -45deg,
-        var(--vermillion) 0,
-        var(--vermillion) 6px,
-        var(--bg) 6px,
-        var(--bg) 12px
-      );
-      position: relative;
-      z-index: 1;
-    }
-
-    .page {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 65fr 35fr;
-      min-height: calc(100vh - 4px);
-    }
-
-    .left {
-      padding: 5rem 3rem 5rem 4.5rem;
-      border-right: 1px solid var(--very-dim);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .right {
-      padding: 5rem 4.5rem 5rem 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .kicker {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.55rem;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 3.5rem;
-    }
-
-    .headline-block {
-      margin-bottom: 2rem;
-      line-height: 0.88;
-    }
-
-    .hero-word {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: clamp(5rem, 11vw, 9.5rem);
-      letter-spacing: -0.04em;
-      color: var(--display);
-    }
-
-    .hero-ext {
-      color: var(--vermillion);
-    }
-
-    .hero-sub {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 500;
-      font-size: clamp(0.82rem, 1.3vw, 1rem);
-      line-height: 1.45;
-      color: rgba(200, 200, 200, 0.5);
-      margin-bottom: 1.75rem;
-      max-width: 480px;
-    }
-
-    .hero-body {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.88rem;
-      line-height: 1.8;
-      color: rgba(200, 200, 200, 0.55);
-      max-width: 460px;
-    }
-
-    .rule {
-      width: 2.5rem;
-      height: 1px;
-      background: var(--process-blue);
-      margin-top: 3rem;
-      opacity: 0.7;
-    }
-
-    .form-comments {
-      margin-bottom: 3rem;
-    }
-
-    .form-comment {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--process-blue);
-      line-height: 1.9;
-    }
-
-    .embed-wrap {
-      margin-bottom: 1rem;
-    }
-
-    .form-note {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.5rem;
-      color: rgba(200, 200, 200, 0.22);
-      letter-spacing: 0.08em;
-    }
-
-    .footer {
-      position: relative;
-      z-index: 1;
-      padding: 1.5rem 4.5rem;
-      border-top: 1px solid var(--very-dim);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-mark {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.5rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(200, 200, 200, 0.22);
-    }
-
-    .footer-attr {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.5rem;
-      color: rgba(200, 200, 200, 0.14);
-    }
-
+    .nav { position: fixed; top: 4px; left: 0; right: 0; z-index: 10; padding: 1rem 2.5rem; display: flex; justify-content: space-between; align-items: center; background: rgba(13,13,13,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+    .bmark { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.4rem; color: var(--yolk); text-decoration: none; letter-spacing: -0.04em; line-height: 1; }
+    .bmark .dot { color: var(--vermillion); }
+    .nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--yolk-dim); text-decoration: none; transition: color 0.12s; }
+    .nav-link:hover { color: var(--yolk); }
     .brand-b { text-transform: none; }
     .brand-dot { color: var(--vermillion); }
 
-    .nav { position: fixed; top: 4px; left: 0; right: 0; z-index: 10; padding: 1rem 2.5rem; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,10,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--very-dim); }
-    .bmark { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.4rem; color: var(--process-blue); text-decoration: none; letter-spacing: -0.04em; line-height: 1; }
-    .bmark .dot { color: var(--vermillion); }
-    .nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,200,200,0.4); text-decoration: none; transition: color 0.12s; }
-    .nav-link:hover { color: var(--process-blue); }
+    .page { position: relative; z-index: 1; display: grid; grid-template-columns: 65fr 35fr; min-height: calc(100vh - 4px); }
+    .left { padding: 5rem 3rem 5rem 4.5rem; border-right: 1px solid var(--rule); display: flex; flex-direction: column; justify-content: center; }
+    .right { padding: 5rem 4.5rem 5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+
+    .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--yolk-dim); margin-bottom: 3.5rem; }
+
+    .headline-block { margin-bottom: 2rem; line-height: 0.88; }
+    .hero-word { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(5rem, 11vw, 9.5rem); letter-spacing: -0.04em; color: var(--yolk); }
+    .hero-ext { color: var(--vermillion); }
+
+    .hero-sub { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: clamp(0.82rem, 1.3vw, 1rem); line-height: 1.45; color: var(--yolk-text); margin-bottom: 1.75rem; max-width: 480px; }
+    .hero-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; line-height: 1.8; color: rgba(247,211,68,0.6); max-width: 520px; }
+
+    .rule { width: 2.5rem; height: 1px; background: var(--yolk); margin-top: 3rem; opacity: 0.45; }
+
+    .form-comments { margin-bottom: 3rem; }
+    .form-comment { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--yolk-dim); line-height: 1.95; }
+    .form-comment .syntax { color: rgba(247,211,68,0.35); }
+
+    .embed-wrap { margin-bottom: 1rem; }
+    .form-note { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: rgba(247,211,68,0.3); letter-spacing: 0.1em; }
+
+    .footer { position: relative; z-index: 1; padding: 1.5rem 4.5rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+    .footer-mark { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--yolk-dim); }
+    .footer-attr { font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; color: rgba(247,211,68,0.3); }
 
     @media (max-width: 768px) {
+      .nav { padding: 0.75rem 1.25rem; }
       .page { grid-template-columns: 1fr; }
-      .left {
-        padding: 3.5rem 1.75rem 3rem;
-        border-right: none;
-        border-bottom: 1px solid var(--very-dim);
-      }
+      .left { padding: 3.5rem 1.75rem 3rem; border-right: none; border-bottom: 1px solid var(--rule); }
       .right { padding: 3rem 1.75rem 4rem; }
-      .footer {
-        padding: 1.5rem 1.75rem;
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: flex-start;
-      }
+      .footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
     }
   </style>
 </head>
@@ -231,18 +86,18 @@
 
   <div class="page">
     <div class="left">
-      <div class="kicker">Markdown, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></div>
+      <div class="kicker">Markdown, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span> · Field notes from real operations</div>
 
       <div class="headline-block">
         <span class="hero-word">MARKDOWN<span class="hero-ext">.md</span></span>
       </div>
 
-      <p class="hero-sub">For founders who've outgrown the typical tech newsletter.</p>
+      <p class="hero-sub">For operators and technical founders running real operations.</p>
 
       <p class="hero-body">
-        We build Bolt, AcuOps, and Amplify on live operations — real warehouses,
-        real customer ERPs, real consequences. We write about the architectural
-        decisions we regret, the vendors we replaced, and the things that held.
+        War stories from inside the work — both the client engagements and
+        the products we ship. We write about the architectural decisions
+        we regret, the vendors we replaced, and the things that held.
         If you want the sanitized version, it's already on every newsletter
         you've subscribed to.
       </p>
@@ -252,15 +107,13 @@
 
     <div class="right">
       <div class="form-comments">
-        <div class="form-comment">// twice monthly</div>
-        <div class="form-comment">// technical founders + operators</div>
-        <div class="form-comment">// one click out, always</div>
+        <div class="form-comment"><span class="syntax">//</span> issued when there's something to say</div>
+        <div class="form-comment"><span class="syntax">//</span> for operators + technical founders</div>
+        <div class="form-comment"><span class="syntax">//</span> one click out, always</div>
       </div>
 
       <div class="embed-wrap">
-        <iframe src="https://embeds.beehiiv.com/pub_4e58019b-916a-42ec-94bd-99e35e601bde?slim=true" data-test-id="beehiiv-embed"
-          height="52" frameborder="0" scrolling="no"
-          style="margin: 0; border-radius: 0px !important; background-color: transparent; width: 100%;"></iframe>
+        <iframe src="https://embeds.beehiiv.com/pub_4e58019b-916a-42ec-94bd-99e35e601bde?slim=true" data-test-id="beehiiv-embed" height="52" frameborder="0" scrolling="no" style="margin: 0; border-radius: 0px !important; background-color: transparent; width: 100%;"></iframe>
       </div>
       <p class="form-note">No spam. Unsubscribe any time.</p>
     </div>
