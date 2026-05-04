@@ -197,6 +197,13 @@
     }
 
     .brand-b { text-transform: none; }
+    .brand-dot { color: var(--vermillion); }
+
+    .nav { position: fixed; top: 4px; left: 0; right: 0; z-index: 10; padding: 1rem 2.5rem; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,10,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--very-dim); }
+    .bmark { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.4rem; color: var(--process-blue); text-decoration: none; letter-spacing: -0.04em; line-height: 1; }
+    .bmark .dot { color: var(--vermillion); }
+    .nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,200,200,0.4); text-decoration: none; transition: color 0.12s; }
+    .nav-link:hover { color: var(--process-blue); }
 
     @media (max-width: 768px) {
       .page { grid-template-columns: 1fr; }
@@ -217,10 +224,14 @@
 </head>
 <body>
   <div class="stripe"></div>
+  <nav class="nav">
+    <a href="/" class="bmark">b<span class="dot">.</span></a>
+    <a href="https://build.b.studio" class="nav-link">← Build, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
+  </nav>
 
   <div class="page">
     <div class="left">
-      <div class="kicker">Markdown, by Studio <span class="brand-b">b.</span></div>
+      <div class="kicker">Markdown — the newsletter of Build, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></div>
 
       <div class="headline-block">
         <span class="hero-word">MARKDOWN<span class="hero-ext">.md</span></span>
@@ -256,8 +267,8 @@
   </div>
 
   <footer class="footer">
-    <span class="footer-mark">Markdown, by Studio <span class="brand-b">b.</span></span>
-    <span class="footer-attr">Published by Kevin Bibelhausen · Studio <span class="brand-b">b.</span></span>
+    <span class="footer-mark">Markdown, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></span>
+    <span class="footer-attr">Published by Kevin Bibelhausen · Studio <span class="brand-b">b<span class="brand-dot">.</span></span></span>
   </footer>
 </body>
 </html>

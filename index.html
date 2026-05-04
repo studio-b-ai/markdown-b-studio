@@ -1,2 +1,148 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="refresh" content="0;url=/subscribe/"></head><body></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown, by Studio b. — For founders who've outgrown the typical tech newsletter.</title>
+  <meta name="description" content="The newsletter of Build, by Studio b. War stories from running Bolt, AcuOps, and Amplify on real operations.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Markdown, by Studio b.">
+  <meta property="og:title" content="For founders who've outgrown the typical tech newsletter.">
+  <meta property="og:description" content="The newsletter of Build, by Studio b. War stories from running Bolt, AcuOps, and Amplify on real operations.">
+  <meta property="og:url" content="https://markdown.b.studio">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0A0A0A;
+      --display: #E8E8E8;
+      --body-text: #C8C8C8;
+      --process-blue: #3A7CA5;
+      --vermillion: #D94425;
+      --very-dim: rgba(200,200,200,0.08);
+      --dim: rgba(200,200,200,0.35);
+    }
+    html { height: 100%; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--body-text); font-family: 'IBM Plex Mono', monospace; min-height: 100vh; position: relative; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(-45deg, transparent 0, transparent 22px, rgba(58,124,165,0.045) 22px, rgba(58,124,165,0.045) 23px); animation: drift 160s linear infinite; pointer-events: none; z-index: 0; }
+    @keyframes drift { from { background-position: 0 0; } to { background-position: 300px 300px; } }
+
+    .stripe { height: 4px; background: repeating-linear-gradient(-45deg, var(--vermillion) 0, var(--vermillion) 6px, var(--bg) 6px, var(--bg) 12px); position: relative; z-index: 1; }
+
+    .nav { position: relative; z-index: 1; padding: 1.25rem 4rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--very-dim); }
+    .bmark { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.6rem; color: var(--process-blue); text-decoration: none; letter-spacing: -0.04em; line-height: 1; }
+    .bmark .dot { color: var(--vermillion); }
+    .nav-right { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,200,200,0.4); text-decoration: none; transition: color 0.12s; padding: 0.5rem; }
+    .nav-link:hover { color: var(--process-blue); }
+    .brand-b { text-transform: none; }
+    .brand-dot { color: var(--vermillion); }
+
+    .hero { position: relative; z-index: 1; padding: 6rem 4rem 4rem; max-width: 1200px; }
+    .firm-label { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.4); margin-bottom: 3rem; }
+    .firm-label a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(200,200,200,0.2); transition: color 0.12s, border-color 0.12s; }
+    .firm-label a:hover { color: var(--process-blue); border-bottom-color: var(--process-blue); }
+    .hero-headline { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(4rem, 9vw, 8rem); letter-spacing: -0.04em; line-height: 0.9; color: var(--display); margin-bottom: 2rem; }
+    .hero-ext { color: var(--vermillion); }
+    .hero-sub { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: clamp(0.85rem, 1.4vw, 1.05rem); line-height: 1.45; color: rgba(200,200,200,0.55); margin-bottom: 1.5rem; max-width: 540px; }
+    .hero-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; line-height: 1.8; color: rgba(200,200,200,0.5); max-width: 540px; }
+
+    .subscribe { position: relative; z-index: 1; padding: 5rem 4rem; border-top: 1px solid var(--very-dim); border-bottom: 1px solid var(--very-dim); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .subscribe-left .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.35); margin-bottom: 1rem; }
+    .subscribe-left h2 { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.15; color: var(--display); margin-bottom: 1rem; }
+    .subscribe-left p { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; line-height: 1.75; color: rgba(200,200,200,0.5); max-width: 480px; }
+    .subscribe-right .form-comments { margin-bottom: 2rem; }
+    .form-comment { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--process-blue); line-height: 1.9; }
+
+    .archive { position: relative; z-index: 1; padding: 5rem 4rem; }
+    .section-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.35); margin-bottom: 2rem; }
+    .archive-empty { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.5rem; color: var(--display); margin-bottom: 1rem; }
+    .archive-empty-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; line-height: 1.75; color: rgba(200,200,200,0.45); max-width: 540px; }
+
+    footer { position: relative; z-index: 1; padding: 3rem 4rem 2rem; border-top: 1px solid var(--very-dim); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+    .footer-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.35); margin-bottom: 0.75rem; }
+    .footer-col a { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(200,200,200,0.5); text-decoration: none; padding: 0.25rem 0; transition: color 0.12s; }
+    .footer-col a:hover { color: var(--process-blue); }
+    .footer-bottom { position: relative; z-index: 1; padding: 1.25rem 4rem 2rem; display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(200,200,200,0.25); }
+
+    @media (max-width: 768px) {
+      .nav { padding: 1rem 1.5rem; }
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .subscribe { padding: 3rem 1.5rem; grid-template-columns: 1fr; gap: 2rem; }
+      .archive { padding: 3rem 1.5rem; }
+      footer { grid-template-columns: 1fr; padding: 3rem 1.5rem 1.5rem; }
+      .footer-bottom { padding: 1rem 1.5rem 2rem; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="stripe"></div>
+
+<nav class="nav">
+  <a href="/" class="bmark">b<span class="dot">.</span></a>
+  <div class="nav-right">
+    <a href="https://build.b.studio" class="nav-link">← Build</a>
+    <a href="#archive" class="nav-link">Archive</a>
+    <a href="#subscribe" class="nav-link">Subscribe →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <p class="firm-label">Markdown — the newsletter of <a href="https://build.b.studio">Build, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a></p>
+  <h1 class="hero-headline">MARKDOWN<span class="hero-ext">.md</span></h1>
+  <p class="hero-sub">For founders who've outgrown the typical tech newsletter.</p>
+  <p class="hero-body">We build Bolt, AcuOps, and Amplify on live operations — real warehouses, real customer ERPs, real consequences. We write about the architectural decisions we regret, the vendors we replaced, and the things that held. If you want the sanitized version, it's already on every newsletter you've subscribed to.</p>
+</section>
+
+<section class="subscribe" id="subscribe">
+  <div class="subscribe-left">
+    <div class="kicker">Subscribe — free</div>
+    <h2>Twice monthly. One click out, always.</h2>
+    <p>No drip campaign, no growth-hacked send cadence. War stories and architectural notes from inside Bolt, AcuOps, and Amplify — written for technical founders + operators.</p>
+  </div>
+  <div class="subscribe-right">
+    <div class="form-comments">
+      <div class="form-comment">// twice monthly</div>
+      <div class="form-comment">// technical founders + operators</div>
+      <div class="form-comment">// one click out, always</div>
+    </div>
+    <iframe src="https://embeds.beehiiv.com/pub_4e58019b-916a-42ec-94bd-99e35e601bde?slim=true" data-test-id="beehiiv-embed" height="52" frameborder="0" scrolling="no" style="margin: 0; border-radius: 0px !important; background-color: transparent; width: 100%;"></iframe>
+  </div>
+</section>
+
+<section class="archive" id="archive">
+  <p class="section-eyebrow">Archive</p>
+  <p class="archive-empty">Issue 001 — coming soon.</p>
+  <p class="archive-empty-body">Markdown is launching. Subscribe above to get the first issue when it ships, and every issue after that.</p>
+</section>
+
+<footer>
+  <div class="footer-col">
+    <h4>Markdown</h4>
+    <a href="#subscribe">Subscribe</a>
+    <a href="#archive">Archive</a>
+  </div>
+  <div class="footer-col">
+    <h4>The firm</h4>
+    <a href="https://consulting.b.studio">Consulting, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
+    <a href="https://capital.b.studio">Capital, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
+    <a href="https://build.b.studio">Build, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
+  </div>
+  <div class="footer-col">
+    <h4>Hub</h4>
+    <a href="https://b.studio">b<span class="brand-dot">.</span>studio</a>
+    <a href="mailto:hello@b.studio">hello@b<span class="brand-dot">.</span>studio</a>
+  </div>
+</footer>
+
+<div class="footer-bottom">
+  <span>Markdown, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span> · Published by Kevin Bibelhausen</span>
+  <span>&copy; 2026 Studio <span class="brand-b">b<span class="brand-dot">.</span></span></span>
+</div>
+
+</body>
+</html>
