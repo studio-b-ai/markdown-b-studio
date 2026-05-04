@@ -57,6 +57,18 @@
     .subscribe-right .form-comments { margin-bottom: 2rem; }
     .form-comment { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--process-blue); line-height: 1.9; }
 
+    .ships { position: relative; z-index: 1; padding: 5rem 4rem; border-top: 1px solid var(--very-dim); border-bottom: 1px solid var(--very-dim); }
+    .ships-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.35); margin-bottom: 1rem; }
+    .ships-headline { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.15; color: var(--display); margin-bottom: 2.5rem; }
+    .ship-card { display: grid; grid-template-columns: 200px 1fr auto; gap: 2.5rem; align-items: baseline; padding: 1.75rem 0; border-top: 1px solid var(--very-dim); }
+    .ship-card:last-child { border-bottom: 1px solid var(--very-dim); }
+    .ship-name { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.1rem; color: var(--process-blue); text-decoration: none; transition: color 0.12s; }
+    .ship-name:hover { color: var(--display); }
+    .ship-body { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: rgba(200,200,200,0.55); }
+    .ship-link { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--vermillion); text-decoration: none; white-space: nowrap; transition: color 0.12s; }
+    .ship-link:hover { color: var(--display); }
+    @media (max-width: 768px) { .ship-card { grid-template-columns: 1fr; gap: 0.75rem; } }
+
     .archive { position: relative; z-index: 1; padding: 5rem 4rem; }
     .section-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,200,200,0.35); margin-bottom: 2rem; }
     .archive-empty { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.5rem; color: var(--display); margin-bottom: 1rem; }
@@ -85,14 +97,15 @@
 <nav class="nav">
   <a href="/" class="bmark">b<span class="dot">.</span></a>
   <div class="nav-right">
-    <a href="https://build.b.studio" class="nav-link">← Build</a>
+    <a href="https://b.studio" class="nav-link">← b<span class="brand-dot">.</span>studio</a>
+    <a href="#ships" class="nav-link">What we ship</a>
     <a href="#archive" class="nav-link">Archive</a>
     <a href="#subscribe" class="nav-link">Subscribe →</a>
   </div>
 </nav>
 
 <section class="hero">
-  <p class="firm-label">Markdown — the newsletter of <a href="https://build.b.studio">Build, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a></p>
+  <p class="firm-label">Markdown, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span> · Build notes from real operations</p>
   <h1 class="hero-headline">MARKDOWN<span class="hero-ext">.md</span></h1>
   <p class="hero-sub">For founders who've outgrown the typical tech newsletter.</p>
   <p class="hero-body">We build Bolt, AcuOps, and Amplify on live operations — real warehouses, real customer ERPs, real consequences. We write about the architectural decisions we regret, the vendors we replaced, and the things that held. If you want the sanitized version, it's already on every newsletter you've subscribed to.</p>
@@ -114,6 +127,26 @@
   </div>
 </section>
 
+<section class="ships" id="ships">
+  <p class="ships-eyebrow">// What Studio b<span class="brand-dot">.</span> ships</p>
+  <h2 class="ships-headline">Three products. All running in production.</h2>
+  <div class="ship-card">
+    <a href="https://bolt.b.studio" class="ship-name">Bolt</a>
+    <p class="ship-body">Continuous-goods WMS for distributors who sell by the foot, yard, or kilogram. The things generic WMS counts wrong: container tracking, partial-cut inventory, DRP, ATP. Running at Heritage Fabrics in production.</p>
+    <a href="https://bolt.b.studio" class="ship-link">bolt.b<span class="brand-dot">.</span>studio →</a>
+  </div>
+  <div class="ship-card">
+    <a href="https://acuops.com" class="ship-name">AcuOps</a>
+    <p class="ship-body">Acumatica DevOps platform. Health probes, post-publish test suite, CI/CD through the Customization API. The infrastructure layer Acumatica doesn't ship. VAR-facing.</p>
+    <a href="https://acuops.com" class="ship-link">acuops.com →</a>
+  </div>
+  <div class="ship-card">
+    <a href="https://amplify.b.studio" class="ship-name">Amplify</a>
+    <p class="ship-body">We built this to run our own marketing. Now we sell it. Detects signals from X, LinkedIn, and GitHub. Drafts newsletter issues and social content in a calibrated voice. Routes through Slack for approval before anything publishes.</p>
+    <a href="https://amplify.b.studio" class="ship-link">amplify.b<span class="brand-dot">.</span>studio →</a>
+  </div>
+</section>
+
 <section class="archive" id="archive">
   <p class="section-eyebrow">Archive</p>
   <p class="archive-empty">Issue 001 — coming soon.</p>
@@ -127,14 +160,16 @@
     <a href="#archive">Archive</a>
   </div>
   <div class="footer-col">
-    <h4>The firm</h4>
-    <a href="https://consulting.b.studio">Consulting, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
-    <a href="https://capital.b.studio">Capital, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
-    <a href="https://build.b.studio">Build, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
+    <h4>Other newsletters</h4>
+    <a href="https://dispatch.b.studio">Dispatch, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
+    <a href="https://dli.b.studio">DLI, by Studio <span class="brand-b">b<span class="brand-dot">.</span></span></a>
   </div>
   <div class="footer-col">
-    <h4>Hub</h4>
+    <h4>Studio <span class="brand-b">b<span class="brand-dot">.</span></span></h4>
     <a href="https://b.studio">b<span class="brand-dot">.</span>studio</a>
+    <a href="https://bolt.b.studio">Bolt</a>
+    <a href="https://acuops.com">AcuOps</a>
+    <a href="https://amplify.b.studio">Amplify</a>
     <a href="mailto:hello@b.studio">hello@b<span class="brand-dot">.</span>studio</a>
   </div>
 </footer>
