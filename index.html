@@ -69,6 +69,18 @@
     .embed-wrap { margin-bottom: 1rem; }
     .form-note { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: rgba(200,200,200,0.22); margin-top: 1rem; letter-spacing: 0.1em; }
 
+    .terminal-prompt { display: flex; align-items: center; border-bottom: 1px solid var(--process-blue-dim); padding-bottom: 0.75rem; margin-bottom: 1.25rem; transition: border-color 0.15s; }
+    .terminal-prompt:focus-within { border-bottom-color: var(--process-blue); }
+    .prompt-char { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--process-blue); margin-right: 0.75rem; flex-shrink: 0; user-select: none; }
+    .email-input { background: none; border: none; outline: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; color: var(--display); width: 100%; }
+    .email-input::placeholder { color: rgba(200,200,200,0.22); }
+    .submit-btn { display: flex; width: 100%; justify-content: space-between; align-items: center; background: var(--vermillion); color: #F4F1EB; border: none; padding: 1rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; text-align: left; transition: background 0.1s; }
+    .submit-btn:hover { background: #C43820; }
+    .submit-btn[disabled] { opacity: 0.6; cursor: wait; }
+    .submit-arrow { letter-spacing: 0; }
+    .form-status { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--process-blue); margin-top: 1rem; line-height: 1.6; min-height: 1.2em; }
+    .form-status.error { color: var(--vermillion); }
+
     .ships { position: relative; z-index: 1; padding: 5rem 4rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .ships-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); margin-bottom: 1rem; }
     .ships-headline { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.15; color: var(--display); margin-bottom: 2.5rem; }
@@ -146,10 +158,54 @@
       <div class="form-comment"><span class="syntax">//</span> for operators + technical founders</div>
       <div class="form-comment"><span class="syntax">//</span> one click out, always</div>
     </div>
-    <div class="embed-wrap">
-      <iframe src="https://embeds.beehiiv.com/pub_4e58019b-916a-42ec-94bd-99e35e601bde?slim=true" data-test-id="beehiiv-embed" height="52" frameborder="0" scrolling="no" style="margin: 0; border-radius: 0px !important; background-color: transparent; width: 100%;"></iframe>
-    </div>
+    <form id="subscribe-form" class="embed-wrap" novalidate>
+      <div class="terminal-prompt">
+        <span class="prompt-char">&gt;</span>
+        <input class="email-input" id="subscribe-email" type="email" name="email" placeholder="your@email.com" autocomplete="email" required />
+      </div>
+      <button class="submit-btn" type="submit">
+        <span>Subscribe</span>
+        <span class="submit-arrow">→</span>
+      </button>
+      <p class="form-status" id="subscribe-status" role="status" aria-live="polite"></p>
+    </form>
     <p class="form-note">No spam. Unsubscribe any time.</p>
+    <script>
+      (function () {
+        var form = document.getElementById('subscribe-form');
+        var input = document.getElementById('subscribe-email');
+        var status = document.getElementById('subscribe-status');
+        var btn = form.querySelector('button[type="submit"]');
+        var endpoint = 'https://webhook-router-production-2535.up.railway.app/api/subscribe/markdown';
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          var email = (input.value || '').trim();
+          status.classList.remove('error');
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            status.textContent = '// invalid email';
+            status.classList.add('error');
+            return;
+          }
+          btn.disabled = true;
+          status.textContent = '// subscribing…';
+          try {
+            var r = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: email, utm_source: 'markdown.b.studio', utm_medium: 'web', utm_campaign: 'subscribe-form' }),
+            });
+            if (!r.ok) throw new Error('http ' + r.status);
+            status.textContent = '// subscribed. check your inbox.';
+            input.value = '';
+          } catch (err) {
+            status.textContent = '// could not subscribe — try again later';
+            status.classList.add('error');
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      })();
+    </script>
   </div>
 </div>
 
