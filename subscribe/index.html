@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markdown, by Studio b. — Subscribe</title>
+  <meta name="description" content="For founders who've outgrown the typical tech newsletter. War stories from running Bolt, AcuOps, and Amplify on real operations.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Markdown, by Studio b.">
+  <meta property="og:title" content="For founders who've outgrown the typical tech newsletter.">
+  <meta property="og:description" content="We build Bolt, AcuOps, and Amplify on live operations — real warehouses, real customer ERPs, real consequences. We write about the architectural decisions we regret, the vendors we replaced, and the things that held.">
+  <meta property="og:url" content="https://markdown.b.studio/subscribe">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A0A0A;
+      --display: #E8E8E8;
+      --body-text: #C8C8C8;
+      --dim: rgba(200, 200, 200, 0.35);
+      --very-dim: rgba(200, 200, 200, 0.08);
+      --vermillion: #D94425;
+      --process-blue: #3A7CA5;
+      --process-blue-dim: rgba(58, 124, 165, 0.45);
+    }
+
+    html { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--body-text);
+      font-family: 'IBM Plex Mono', monospace;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent 0,
+        transparent 22px,
+        rgba(58, 124, 165, 0.045) 22px,
+        rgba(58, 124, 165, 0.045) 23px
+      );
+      animation: texture-drift 160s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes texture-drift {
+      from { background-position: 0 0; }
+      to { background-position: 300px 300px; }
+    }
+
+    .stripe {
+      height: 4px;
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--vermillion) 0,
+        var(--vermillion) 6px,
+        var(--bg) 6px,
+        var(--bg) 12px
+      );
+      position: relative;
+      z-index: 1;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 65fr 35fr;
+      min-height: calc(100vh - 4px);
+    }
+
+    .left {
+      padding: 5rem 3rem 5rem 4.5rem;
+      border-right: 1px solid var(--very-dim);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .right {
+      padding: 5rem 4.5rem 5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 3.5rem;
+    }
+
+    .headline-block {
+      margin-bottom: 2rem;
+      line-height: 0.88;
+    }
+
+    .hero-word {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: clamp(5rem, 11vw, 9.5rem);
+      letter-spacing: -0.04em;
+      color: var(--display);
+    }
+
+    .hero-ext {
+      color: var(--vermillion);
+    }
+
+    .hero-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: clamp(0.82rem, 1.3vw, 1rem);
+      line-height: 1.45;
+      color: rgba(200, 200, 200, 0.5);
+      margin-bottom: 1.75rem;
+      max-width: 480px;
+    }
+
+    .hero-body {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: rgba(200, 200, 200, 0.55);
+      max-width: 460px;
+    }
+
+    .rule {
+      width: 2.5rem;
+      height: 1px;
+      background: var(--process-blue);
+      margin-top: 3rem;
+      opacity: 0.7;
+    }
+
+    .form-comments {
+      margin-bottom: 3rem;
+    }
+
+    .form-comment {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--process-blue);
+      line-height: 1.9;
+    }
+
+    .embed-wrap {
+      margin-bottom: 1rem;
+    }
+
+    .form-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.5rem;
+      color: rgba(200, 200, 200, 0.22);
+      letter-spacing: 0.08em;
+    }
+
+    .footer {
+      position: relative;
+      z-index: 1;
+      padding: 1.5rem 4.5rem;
+      border-top: 1px solid var(--very-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-mark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(200, 200, 200, 0.22);
+    }
+
+    .footer-attr {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.5rem;
+      color: rgba(200, 200, 200, 0.14);
+    }
+
+    .brand-b { text-transform: none; }
+
+    @media (max-width: 768px) {
+      .page { grid-template-columns: 1fr; }
+      .left {
+        padding: 3.5rem 1.75rem 3rem;
+        border-right: none;
+        border-bottom: 1px solid var(--very-dim);
+      }
+      .right { padding: 3rem 1.75rem 4rem; }
+      .footer {
+        padding: 1.5rem 1.75rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stripe"></div>
+
+  <div class="page">
+    <div class="left">
+      <div class="kicker">Markdown, by Studio <span class="brand-b">b.</span></div>
+
+      <div class="headline-block">
+        <span class="hero-word">MARKDOWN<span class="hero-ext">.md</span></span>
+      </div>
+
+      <p class="hero-sub">For founders who've outgrown the typical tech newsletter.</p>
+
+      <p class="hero-body">
+        We build Bolt, AcuOps, and Amplify on live operations — real warehouses,
+        real customer ERPs, real consequences. We write about the architectural
+        decisions we regret, the vendors we replaced, and the things that held.
+        If you want the sanitized version, it's already on every newsletter
+        you've subscribed to.
+      </p>
+
+      <div class="rule"></div>
+    </div>
+
+    <div class="right">
+      <div class="form-comments">
+        <div class="form-comment">// twice monthly</div>
+        <div class="form-comment">// technical founders + operators</div>
+        <div class="form-comment">// one click out, always</div>
+      </div>
+
+      <div class="embed-wrap">
+        <iframe src="https://embeds.beehiiv.com/pub_4e58019b-916a-42ec-94bd-99e35e601bde?slim=true" data-test-id="beehiiv-embed"
+          height="52" frameborder="0" scrolling="no"
+          style="margin: 0; border-radius: 0px !important; background-color: transparent; width: 100%;"></iframe>
+      </div>
+      <p class="form-note">No spam. Unsubscribe any time.</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-mark">Markdown, by Studio <span class="brand-b">b.</span></span>
+    <span class="footer-attr">Published by Kevin Bibelhausen · Studio <span class="brand-b">b.</span></span>
+  </footer>
+</body>
+</html>
