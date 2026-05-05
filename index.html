@@ -18,30 +18,33 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:             #0F1014;
-      --surface:        #181922;
-      --surface-2:      #20212C;
-      --display:        #EDEDED;
-      --body-text:      #B5B5BD;
-      --dim:            #7A7A82;
-      --rule:           rgba(237,237,237,0.08);
+      color-scheme: light;
+      --bg:             #F4F1EB;            /* paper */
+      --surface:        #EAE6DC;            /* paper-dk — cards, panels */
+      --surface-2:      #DFDACE;            /* paper-darker — input wells */
+      --forest:         #1A3328;
+      --display:        #1A3328;            /* primary text — forest */
+      --body-text:      rgba(26,51,40,0.82); /* forest @ 82% — body */
+      --dim:            rgba(26,51,40,0.55); /* forest @ 55% — meta */
+      --rule:           rgba(26,51,40,0.14);
       --vermillion:     #D94425;
       --vermillion-12:  rgba(217,68,37,0.12);
       --yolk:           #F7D344;
-      --yolk-dim:       rgba(247,211,68,0.7);
-      --yolk-08:        rgba(247,211,68,0.08);
+      --yolk-dim:       rgba(247,211,68,0.85);
+      --yolk-45:        rgba(247,211,68,0.45); /* wordmark wash */
+      --yolk-08:        rgba(247,211,68,0.18); /* highlight wash */
       --stripe-height:  10px;
     }
 
     html { height: 100%; scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--body-text); font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.65; min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-    /* caution stripe */
+    /* caution stripe — yolk on forest reads as warning tape on paper */
     .caution-stripe {
       height: var(--stripe-height);
       background: repeating-linear-gradient(-45deg,
         var(--yolk) 0, var(--yolk) 9px,
-        var(--bg) 9px, var(--bg) 18px);
+        var(--forest) 9px, var(--forest) 18px);
     }
 
     /* container */
@@ -86,8 +89,13 @@
       font-size: clamp(4rem, 14vw, 11rem);
       line-height: 1;
       letter-spacing: -0.04em;
-      color: var(--display);
+      color: var(--forest);
       margin-bottom: 3rem;
+      display: inline-block;
+      background: var(--yolk-45);
+      padding: 0.05em 0.18em 0.08em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
     }
     .hero-grid {
       display: grid;
@@ -95,7 +103,8 @@
       gap: 4rem;
       align-items: start;
     }
-    .wordmark .ext { color: var(--vermillion); }
+    .wordmark .ext { color: var(--yolk); filter: brightness(0.74); }
+    .wordmark .dot { color: var(--vermillion); }
     .hero-left h1 {
       font-family: 'Inter', sans-serif;
       font-weight: 700;
@@ -108,7 +117,7 @@
     }
     .hero-left h1 .highlight {
       background: var(--yolk-08);
-      color: var(--yolk);
+      color: var(--forest);
       padding: 0 0.2em;
       font-weight: 700;
     }
@@ -166,7 +175,7 @@
     .subscribe-card input[type="email"]::placeholder { color: var(--dim); }
     .subscribe-card .submit-btn {
       width: 100%;
-      background: var(--vermillion); color: var(--display);
+      background: var(--vermillion); color: var(--bg);
       border: none;
       padding: 1.05rem 1rem;
       font-family: 'JetBrains Mono', monospace;
@@ -400,7 +409,7 @@
 
   <!-- hero: wordmark spans full width, then hero text + subscribe side-by-side -->
   <div class="hero">
-    <div class="wordmark">MARKDOWN<span class="ext">.md</span></div>
+    <div class="wordmark">MARKDOWN<span class="dot">.</span><span class="ext">md</span></div>
     <div class="hero-grid">
     <div class="hero-left">
       <h1>Field notes from real operations — <span class="highlight">written by the operators running the systems.</span></h1>
