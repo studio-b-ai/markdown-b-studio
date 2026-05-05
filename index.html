@@ -75,23 +75,25 @@
     }
     .main-nav a:hover { color: var(--vermillion); }
 
-    /* hero grid 65/35 */
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 65fr 35fr;
-      gap: 4rem;
+    /* hero: full-width wordmark + 60/40 grid */
+    .hero {
       padding: 5.5rem 0 5rem;
       border-bottom: 1px solid var(--rule);
-      align-items: start;
     }
     .wordmark {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: clamp(4rem, 10vw, 8.5rem);
+      font-size: clamp(4rem, 14vw, 11rem);
       line-height: 1;
       letter-spacing: -0.04em;
       color: var(--display);
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 60fr 40fr;
+      gap: 4rem;
+      align-items: start;
     }
     .wordmark .ext { color: var(--vermillion); }
     .hero-left h1 {
@@ -128,7 +130,7 @@
     /* subscribe card */
     .subscribe-card {
       background: var(--surface);
-      padding: 2.25rem;
+      padding: 1.75rem;
       border: 1px solid var(--rule);
     }
     .subscribe-card .card-label {
@@ -166,9 +168,9 @@
       width: 100%;
       background: var(--vermillion); color: var(--display);
       border: none;
-      padding: 0.95rem 1rem;
+      padding: 1.05rem 1rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; font-weight: 700;
+      font-size: 0.82rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.2em;
       cursor: pointer; transition: background 0.12s;
       display: flex; justify-content: space-between; align-items: center;
@@ -396,10 +398,11 @@
     </nav>
   </div>
 
-  <!-- hero grid 65/35 -->
-  <div class="hero-grid">
+  <!-- hero: wordmark spans full width, then hero text + subscribe side-by-side -->
+  <div class="hero">
+    <div class="wordmark">MARKDOWN<span class="ext">.md</span></div>
+    <div class="hero-grid">
     <div class="hero-left">
-      <div class="wordmark">MARKDOWN<span class="ext">.md</span></div>
       <h1>Field notes from real operations — <span class="highlight">written by the operators running the systems.</span></h1>
       <p class="hero-lede">Markdown is the Studio b. publication for technical founders and operators who actually have to make the software work in production. Postmortems, infrastructure notes, the architectural decisions with the trade-offs still named. Every post is something that was actually deployed, broke, or got fixed — written by the people who fixed it.</p>
       <p class="hero-meta">ISSUED WHEN THERE'S SOMETHING TO SAY <span class="vm">·</span> STUDIO B<span class="vm">.</span> OPERATIONS</p>
@@ -419,6 +422,7 @@
         <p class="form-status" id="subscribe-status" role="status" aria-live="polite"></p>
         <p class="footnote">// issued when there's something to say<br>No spam. One click out, always.</p>
       </div>
+    </div>
     </div>
   </div>
 
