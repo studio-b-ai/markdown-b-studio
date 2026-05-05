@@ -31,6 +31,7 @@
       --vermillion:     #D94425;
       --vermillion-12:  rgba(217,68,37,0.12);
       --yolk:           #F7D344;
+      --yolk-deep:      #B8881A;            /* heritage-gold for "md" */
       --yolk-dim:       rgba(247,211,68,0.85);
       --yolk-08:        rgba(247,211,68,0.18); /* highlighter wash */
       --stripe-height:  10px;
@@ -103,7 +104,8 @@
       gap: 4rem;
       align-items: start;
     }
-    .wordmark .ext { color: var(--vermillion); }
+    .wordmark .ext { color: var(--yolk-deep); }
+    .wordmark .dot { color: var(--vermillion); }
     .hero-left h1 {
       font-family: 'Inter', sans-serif;
       font-weight: 700;
@@ -408,7 +410,7 @@
 
   <!-- hero: wordmark spans full width, then hero text + subscribe side-by-side -->
   <div class="hero">
-    <div class="wordmark">MARKDOWN<span class="ext">.md</span></div>
+    <div class="wordmark">MARKDOWN<span class="dot">.</span><span class="ext">md</span></div>
     <div class="hero-grid">
     <div class="hero-left">
       <h1>Field notes from real operations — <span class="highlight">written by the operators running the systems.</span></h1>
