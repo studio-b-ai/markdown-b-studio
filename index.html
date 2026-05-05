@@ -24,7 +24,6 @@
       --surface-2:      #DFDACE;            /* paper-darker — input wells */
       --forest:         #1A3328;
       --display:        #1A3328;            /* primary text — forest */
-      --wordmark-fill:  rgba(247,211,68,0.92); /* translucent yolk — wordmark only */
       --body-text:      rgba(26,51,40,0.82); /* forest @ 82% — body */
       --dim:            rgba(26,51,40,0.55); /* forest @ 55% — meta */
       --rule:           rgba(26,51,40,0.14);
@@ -32,7 +31,8 @@
       --vermillion-12:  rgba(217,68,37,0.12);
       --yolk:           #F7D344;
       --yolk-dim:       rgba(247,211,68,0.85);
-      --yolk-08:        rgba(247,211,68,0.18); /* highlighter wash */
+      --yolk-45:        rgba(247,211,68,0.45); /* wordmark wash */
+      --yolk-08:        rgba(247,211,68,0.18); /* highlight wash */
       --stripe-height:  10px;
     }
 
@@ -92,7 +92,7 @@
       color: var(--forest);
       margin-bottom: 3rem;
       display: inline-block;
-      background: rgba(247, 211, 68, 0.45);
+      background: var(--yolk-45);
       padding: 0.05em 0.18em 0.08em;
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
