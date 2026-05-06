@@ -1,0 +1,13 @@
+name: Header CSS extraction lint
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run header CSS lint
+        run: bash .github/scripts/header-lint.sh
