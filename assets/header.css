@@ -1,0 +1,39 @@
+/* ============================================================================
+ * Markdown, by Studio b. — family header
+ * Binary-accent stripe system (locked 2026-05-06 via /design-consultation).
+ *
+ * Loaded by every published page on markdown.b.studio. Touch with care.
+ *
+ * Construction (top → bottom):
+ *   1px forest@60 outline + 10px forest/paper diagonal stripe (-45°, 9/9 bands)
+ *   + 1px forest@60 outline + 3px solid yolk accent line (cadence signal).
+ *
+ * Markdown is a CADENCE surface — it gets the yolk accent line.
+ * Yolk is the operator/builder family signal across Studio b. surfaces.
+ * Structural surfaces (b.studio, invest) wear the bare stripe (no ::after).
+ *
+ * Co-located outside the page so future content edits to index.html /
+ * issues/*.html do not touch the visual layer.
+ * ============================================================================ */
+
+.caution-stripe {
+  height: 10px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--forest, #1A3328) 0, var(--forest, #1A3328) 9px,
+    var(--bg,     #F4F1EB) 9px, var(--bg,     #F4F1EB) 18px
+  );
+  border-top:    1px solid rgba(26, 51, 40, 0.60);
+  border-bottom: 1px solid rgba(26, 51, 40, 0.60);
+  position: relative;
+}
+
+/* Cadence accent — yolk publication seal under the stripe. */
+.caution-stripe::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0; top: 100%;
+  height: 3px;
+  background: var(--yolk, #F7D344);
+}
