@@ -438,16 +438,16 @@
     </div>
   </div>
 
-  <!-- featured article: Issue 001 -->
+  <!-- featured article: Issue 002 -->
   <section class="featured" id="featured">
-    <p class="sec-eyebrow">LATEST · ISSUE 001</p>
-    <a href="/issues/001-publishing-in-public.html" class="featured-title">I'm Publishing in Public So I Have to Finish Things</a>
-    <p class="byline">BY <strong>KEVIN BIBELHAUSEN</strong> <span class="vm">·</span> 2026-05-04 <span class="vm">·</span> 5 MIN READ <span class="vm">·</span> INAUGURAL ISSUE</p>
+    <p class="sec-eyebrow">LATEST · ISSUE 002</p>
+    <a href="/issues/002-acumatica-lint-launch.html" class="featured-title">60 ways an Acumatica publish silently fails. And one Python file that catches them.</a>
+    <p class="byline">BY <strong>KEVIN BIBELHAUSEN</strong> <span class="vm">·</span> 2026-05-21 <span class="vm">·</span> 6 MIN READ <span class="vm">·</span> ACUOPS LAUNCH</p>
     <div class="featured-lede">
-      <p>I started Markdown because I was tired of finishing things in private. Here is what "finishing in private" looked like: I'd ship something — a feature, a system, a decision — and then move on. No record of what worked. No record of what didn't. The knowledge lived in a memory file or a session transcript or just in my head, and a month later I'd have to reconstruct it from scratch because I couldn't find the original reasoning.</p>
-      <p>The second reason is simpler: I want to find other operators. Not conference-circuit operators. Not people who talk about operations. People who actually run things — ERP migrations at 2 AM, warehouse software that has to survive the holiday peak, CI/CD pipelines that eat your weekend when they break.</p>
+      <p>A DAC extension shipped to production without a matching <code>&lt;Sql&gt;</code> ALTER TABLE. The publish reported success. The field appeared in <code>$adHocSchema</code>. PUTs returned HTTP 200 with the value echoed in the response body. The value was silently dropped on commit. Every write. For seven days.</p>
+      <p>That kind of failure mode is what we built <code>acumatica-lint</code> to catch. Today it's free, open source, Apache 2.0, and on PyPI. Twenty-five hard-fail validators; every one encodes a real production incident.</p>
     </div>
-    <a href="/issues/001-publishing-in-public.html" class="read-link">Read full issue →</a>
+    <a href="/issues/002-acumatica-lint-launch.html" class="read-link">Read full issue →</a>
   </section>
 
   <!-- what we ship -->
@@ -475,6 +475,10 @@
   <section class="archive" id="archive">
     <p class="sec-eyebrow">// Archive</p>
     <ul class="archive-list">
+      <li class="archive-item">
+        <span class="archive-meta">2026-05-21 <span class="vm">·</span> ISSUE 002 <span class="vm">·</span> ACUOPS LAUNCH</span>
+        <a href="/issues/002-acumatica-lint-launch.html" class="archive-title">60 ways an Acumatica publish silently fails. And one Python file that catches them.</a>
+      </li>
       <li class="archive-item">
         <span class="archive-meta">2026-05-04 <span class="vm">·</span> ISSUE 001 <span class="vm">·</span> INAUGURAL</span>
         <a href="/issues/001-publishing-in-public.html" class="archive-title">I'm Publishing in Public So I Have to Finish Things</a>
